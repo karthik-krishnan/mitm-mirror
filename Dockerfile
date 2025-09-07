@@ -1,14 +1,17 @@
 # Simple mitmproxy mirror image (no product coupling)
 FROM mitmproxy/mitmproxy:latest
 
+# Install Python deps needed by the addon
+RUN python -m pip install --no-cache-dir requests==2.32.3
+
 # Copy addon into container
 COPY addons/simple_mirror.py /addons/simple_mirror.py
 
 # Defaults (all overridable at runtime)
 ENV MITM_LISTEN_PORT=8080
-ENV MIRROR_BASE=                
-ENV MIRROR_PATH=/               
-ENV MIRROR_MATCH=               
+ENV MIRROR_BASE=
+ENV MIRROR_PATH=/
+ENV MIRROR_MATCH=
 ENV MIRROR_METHODS=POST,PUT,PATCH
 ENV MIRROR_JSON_ONLY=true
 ENV MIRROR_ADD_HEADER=true
@@ -21,7 +24,7 @@ EXPOSE 8080 8081
 # Pass envs to addon via --set (works on both Linux & macOS)
 CMD ["sh", "-lc", "\
   mitmdump -p ${MITM_LISTEN_PORT} \
-    -s /addons/simplified_mirror.py \
+    -s /addons/simple_mirror.py \
     --set mirror_base=${MIRROR_BASE} \
     --set mirror_path=${MIRROR_PATH} \
     --set mirror_match=${MIRROR_MATCH} \
