@@ -2,8 +2,6 @@
 
 A tiny, generic **mitmproxy** addon packaged as a container. It runs as an explicit HTTP proxy and **mirrors matching requests** to a configurable HTTP endpoint while letting original requests pass through **unchanged**.
 
-> No coupling to any specific validator/service. Point it at any HTTP URL.
-
 ---
 
 ## Features
