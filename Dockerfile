@@ -6,9 +6,9 @@ COPY addons/simple_mirror.py /addons/simple_mirror.py
 
 # Defaults (all overridable at runtime)
 ENV MITM_LISTEN_PORT=8080
-ENV MIRROR_BASE=                # e.g., http://host.docker.internal:8000  (REQUIRED at runtime)
-ENV MIRROR_PATH=/               # path at the mirror base
-ENV MIRROR_MATCH=               # substring or 'regex:<pattern>' to select which URLs to mirror
+ENV MIRROR_BASE=                
+ENV MIRROR_PATH=/               
+ENV MIRROR_MATCH=               
 ENV MIRROR_METHODS=POST,PUT,PATCH
 ENV MIRROR_JSON_ONLY=true
 ENV MIRROR_ADD_HEADER=true
