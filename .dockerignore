@@ -1,0 +1,12 @@
+# VCS/editors
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+
+# Node artifacts (if present)
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
