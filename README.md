@@ -74,7 +74,7 @@ This image uses ```mitmdump```. Prefer a web UI?
 docker run --rm -it -p 8080:8080 -p 8081:8081 \
   yourorg/mitm-mirror:1.0.0 \
   sh -lc "mitmweb -p ${MITM_LISTEN_PORT:-8080} --web-host 0.0.0.0 \
-          -s /addons/simplified_mirror.py \
+          -s /addons/simple_mirror.py \
           --set mirror_base=$MIRROR_BASE \
           --set mirror_path=$MIRROR_PATH \
           --set mirror_match=$MIRROR_MATCH"
