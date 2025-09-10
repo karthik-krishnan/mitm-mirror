@@ -1,9 +1,26 @@
 """
-simple_mirror.py (compat)
-- Pass-through proxy
-- Mirrors matching requests by POSTing the ORIGINAL BODY BYTES to a target URL
-- No external deps (uses urllib)
-- Options limited to str/bool/int for broad mitmproxy compatibility
+simple_mirror.py
+--------------------
+A tiny mitmproxy addon that:
+  1) Lets all traffic pass through unchanged
+  2) For matching requests, POSTS an exact copy of the **original body** to a
+     RequestWeaver (or any) HTTP endpoint.
+
+Design goals:
+- Mirror only JSON by default (configurable)
+- No wrapping/envelopes: send the same bytes as the original body
+- Add one correlation header for debugging (configurable, can be disabled)
+- Never block the client: send mirror in a background thread by default
+
+Usage (mitmdump):
+  mitmdump -p 8080 -s simple_mirror.py \
+    --set mirror_base=http://mirror.example.com \
+    --set mirror_path=/ \
+    --set mirror_match=http://api.example.com \
+    --set mirror_methods=POST,PUT,PATCH
+
+'mirror_match' supports either plain substring matching or regex when prefixed with 'regex:'.
+Example regex: --set mirror_match=regex:^https?://api\\.example\\.com(/|$)
 """
 
 from mitmproxy import ctx, http
